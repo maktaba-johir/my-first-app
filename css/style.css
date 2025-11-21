@@ -1,0 +1,189 @@
+/* Google Fonts থেকে Kalpurush ফন্ট ইম্পোর্ট করা হচ্ছে */
+@import url('https://fonts.googleapis.com/css2?family=Kalpurush:wght@400;700&display=swap' );
+
+/* বেসিক রিসেট এবং বক্স সাইজিং ঠিক করা */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* সম্পূর্ণ পৃষ্ঠার জন্য ফন্ট এবং ব্যাকগ্রাউন্ড সেট করা */
+body {
+    font-family: 'Kalpurush', sans-serif;
+    background-color: #f0f2f5; /* হালকা ধূসর ব্যাকগ্রাউন্ড */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* মূল কন্টেইনার, যা অ্যাপটিকে মাঝখানে রাখে */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* অ্যাপের হেডার বা শিরোনাম */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+header h1 {
+    color: #0056b3; /* গাঢ় নীল রঙ */
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* ===== শুধুমাত্র এই অংশটি পরিবর্তন বা যোগ করা হয়েছে ===== */
+/* ট্যাব বাটনগুলোকে মাঝখানে রাখার জন্য একটি কন্টেইনার */
+.tab-container {
+    display: flex;
+    justify-content: center; /* বাটনগুলোকে মাঝখানে আনে */
+    margin-bottom: 20px;
+}
+/* ======================================================= */
+
+/* সূরা এবং পারা বাটনগুলোর স্টাইল */
+.tab-btn {
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background-color: #e9ecef;
+    color: #495057;
+    border-radius: 50px; /* গোলাকার বাটন */
+    transition: all 0.3s ease;
+    margin: 0 8px;
+}
+
+/* বাটনের উপর মাউস রাখলে (হোভার) যে স্টাইল হবে */
+.tab-btn:hover {
+    background-color: #dbe4f0;
+    border-color: #0056b3;
+}
+
+/* সক্রিয় (অ্যাক্টিভ) বাটনের স্টাইল */
+.tab-btn.active {
+    background-color: #0056b3;
+    color: #ffffff;
+    border-color: #0056b3;
+}
+
+/* তালিকার প্রতিটি আইটেমের স্টাইল */
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-item:hover {
+    transform: translateY(-3px); /* হালকা উপরে উঠবে */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* তালিকার আইটেমের সিরিয়াল নম্বরের স্টাইল */
+.item-number {
+    background-color: #007bff;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    margin-right: 15px;
+    flex-shrink: 0; /* আকার ছোট হতে বাধা দেয় */
+}
+
+/* তালিকার আইটেমের বিস্তারিত তথ্যের স্টাইল */
+.item-details {
+    flex-grow: 1; /* বাকি সব জায়গা নিয়ে নেয় */
+}
+
+.item-details p {
+    margin: 0;
+}
+
+.item-details strong {
+    font-size: 1.2rem;
+    color: #343a40;
+}
+
+.item-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* বই পড়ার আইকনের স্টাইল */
+.item-icon {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-left: 15px;
+}
+
+/* পিডিএফ ভিউয়ারের স্টাইল */
+.pdf-viewer {
+    position: fixed; /* সম্পূর্ণ স্ক্রিন জুড়ে থাকে */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* কালো আধা-স্বচ্ছ ব্যাকগ্রাউন্ড */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* সবকিছুর উপরে থাকে */
+}
+
+.pdf-viewer.hidden {
+    display: none; /* ডিফল্টভাবে লুকানো থাকে */
+}
+
+.pdf-viewer iframe {
+    width: 90%;
+    height: 90%;
+    border: 2px solid #fff;
+    border-radius: 5px;
+}
+
+/* পিডিএফ বন্ধ করার বাটনের স্টাইল */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* লোডিং এবং এরর মেসেজের স্টাইল */
+.loading, .error-message {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: #6c757d;
+}

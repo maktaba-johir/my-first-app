@@ -1,0 +1,212 @@
+[
+	{
+		"para_number": "1",
+		"para_name_ar": "الم",
+		"para_name_bn": "আলিফ লাম মীম",
+		"start_page": "3",
+		"end_page": "22"
+	},
+	{
+		"para_number": "2",
+		"para_name_ar": "سَيَقُولُ",
+		"para_name_bn": "সায়াকূল",
+		"start_page": "23",
+		"end_page": "42"
+	},
+	{
+		"para_number": "3",
+		"para_name_ar": "تِلْكَ الرُّسُلُ",
+		"para_name_bn": "তিলকার রুসুল",
+		"start_page": "43",
+		"end_page": "62"
+	},
+	{
+		"para_number": "4",
+		"para_name_ar": "لَنْ تَنَالُوا",
+		"para_name_bn": "লান তানালু",
+		"start_page": "63",
+		"end_page": "82"
+	},
+	{
+		"para_number": "5",
+		"para_name_ar": "وَالْمُحْصَنَاتُ",
+		"para_name_bn": "ওয়াল মুহসানাতু",
+		"start_page": "83",
+		"end_page": "102"
+	},
+	{
+		"para_number": "6",
+		"para_name_ar": "لَا يُحِبُّ اللَّهُ",
+		"para_name_bn": "লা ইউহিব্বুল্লাহু",
+		"start_page": "103",
+		"end_page": "122"
+	},
+	{
+		"para_number": "7",
+		"para_name_ar": "وَإِذَا سَمِعُوا",
+		"para_name_bn": "ওয়া ইযা সামি'উ",
+		"start_page": "123",
+		"end_page": "142"
+	},
+	{
+		"para_number": "8",
+		"para_name_ar": "وَلَوْ أَنَّنَا",
+		"para_name_bn": "ওয়া লাও আন্নানা",
+		"start_page": "143",
+		"end_page": "162"
+	},
+	{
+		"para_number": "9",
+		"para_name_ar": "قَالَ الْمَلَأُ",
+		"para_name_bn": "ক্বালাল মালাউ",
+		"start_page": "163",
+		"end_page": "182"
+	},
+	{
+		"para_number": "10",
+		"para_name_ar": "وَاعْلَمُوا",
+		"para_name_bn": "ওয়া'লামু",
+		"start_page": "183",
+		"end_page": "202"
+	},
+	{
+		"para_number": "11",
+		"para_name_ar": "يَعْتَذِرُونَ",
+		"para_name_bn": "ইয়া'তাযিরুন",
+		"start_page": "203",
+		"end_page": "222"
+	},
+	{
+		"para_number": "12",
+		"para_name_ar": "وَمَا مِنْ دَابَّةٍ",
+		"para_name_bn": "ওয়া মা মিন দা-ব্বাতিন",
+		"start_page": "223",
+		"end_page": "242"
+	},
+	{
+		"para_number": "13",
+		"para_name_ar": "وَمَا أُبَرِّئُ",
+		"para_name_bn": "ওয়া মা উবাররিউ",
+		"start_page": "243",
+		"end_page": "262"
+	},
+	{
+		"para_number": "14",
+		"para_name_ar": "رُبَمَا",
+		"para_name_bn": "রুবামা",
+		"start_page": "263",
+		"end_page": "282"
+	},
+	{
+		"para_number": "15",
+		"para_name_ar": "سُبْحَانَ الَّذِي",
+		"para_name_bn": "সুবহানাল্লাযী",
+		"start_page": "283",
+		"end_page": "302"
+	},
+	{
+		"para_number": "16",
+		"para_name_ar": "قَالَ أَلَمْ",
+		"para_name_bn": "ক্বালা আলাম",
+		"start_page": "303",
+		"end_page": "322"
+	},
+	{
+		"para_number": "17",
+		"para_name_ar": "اقْتَرَبَ لِلنَّاسِ",
+		"para_name_bn": "ইক্বতারাবা লিন্না-সি",
+		"start_page": "323",
+		"end_page": "342"
+	},
+	{
+		"para_number": "18",
+		"para_name_ar": "قَدْ أَفْلَحَ",
+		"para_name_bn": "ক্বাদ আফলাহা",
+		"start_page": "343",
+		"end_page": "362"
+	},
+	{
+		"para_number": "19",
+		"para_name_ar": "وَقَالَ الَّذِينَ",
+		"para_name_bn": "ওয়া ক্বালাল্লাযীনা",
+		"start_page": "363",
+		"end_page": "382"
+	},
+	{
+		"para_number": "20",
+		"para_name_ar": "أَمَّنْ خَلَقَ",
+		"para_name_bn": "আম্মান খালাক্বা",
+		"start_page": "383",
+		"end_page": "402"
+	},
+	{
+		"para_number": "21",
+		"para_name_ar": "اتْلُ مَا أُوحِيَ",
+		"para_name_bn": "উতলু মা ঊহিয়া",
+		"start_page": "403",
+		"end_page": "422"
+	},
+	{
+		"para_number": "22",
+		"para_name_ar": "وَمَنْ يَقْنُتْ",
+		"para_name_bn": "ওয়া মাইঁ ইয়াক্বনুত",
+		"start_page": "423",
+		"end_page": "442"
+	},
+	{
+		"para_number": "23",
+		"para_name_ar": "وَمَا لِيَ",
+		"para_name_bn": "ওয়া মা লিয়া",
+		"start_page": "443",
+		"end_page": "462"
+	},
+	{
+		"para_number": "24",
+		"para_name_ar": "فَمَنْ أَظْلَمُ",
+		"para_name_bn": "ফামান আযলামু",
+		"start_page": "463",
+		"end_page": "482"
+	},
+	{
+		"para_number": "25",
+		"para_name_ar": "إِلَيْهِ يُرَدُّ",
+		"para_name_bn": "ইলাইহি ইউরাদ্দু",
+		"start_page": "483",
+		"end_page": "502"
+	},
+	{
+		"para_number": "26",
+		"para_name_ar": "حم",
+		"para_name_bn": "হা-মীম",
+		"start_page": "503",
+		"end_page": "522"
+	},
+	{
+		"para_number": "27",
+		"para_name_ar": "قَالَ فَمَا خَطْبُكُمْ",
+		"para_name_bn": "ক্বালা ফামা খত্ববুকুম",
+		"start_page": "523",
+		"end_page": "542"
+	},
+	{
+		"para_number": "28",
+		"para_name_ar": "قَدْ سَمِعَ اللَّهُ",
+		"para_name_bn": "ক্বাদ সামি'আল্লাহু",
+		"start_page": "543",
+		"end_page": "562"
+	},
+	{
+		"para_number": "29",
+		"para_name_ar": "تَبَارَكَ الَّذِي",
+		"para_name_bn": "তাবা-রাকাল্লাযী",
+		"start_page": "563",
+		"end_page": "586"
+	},
+	{
+		"para_number": "30",
+		"para_name_ar": "عَمَّ يَتَسَاءَلُونَ",
+		"para_name_bn": "আম্মা ইয়াতাসা-আলূন",
+		"start_page": "587",
+		"end_page": "611"
+	}
+]
