@@ -6,6 +6,12 @@
     <title>কুরআন অ্যাপ</title>
     <!-- CSS ফাইল লিঙ্ক করা হয়েছে -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- PDF.js লাইব্রেরি লোড করার জন্য -->
+    <script src="lib/build/pdf.mjs" type="module"></script>
+    <script>
+        // PDF.js ওয়ার্কার স্ক্রিপ্ট সেট করা
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/build/pdf.worker.mjs';
+    </script>
 </head>
 <body>
 
@@ -16,28 +22,33 @@
         </header>
 
         <main>
-            <!-- ===== শুধুমাত্র এই অংশটি পরিবর্তন করা হয়েছে ===== -->
             <!-- ট্যাব বাটনগুলোকে মাঝখানে রাখার জন্য নতুন div যোগ করা হয়েছে -->
             <div class="tab-container">
-                <button class="tab-btn active" data-type="surah">সূরা</button>
-                <button class="tab-btn" data-type="para">পারা</button>
+                <button id="surah-btn" class="tab-btn active">সূরা</button>
+                <button id="para-btn" class="tab-btn">পারা</button>
             </div>
-            <!-- ============================================= -->
 
             <!-- সূরা এবং পারার তালিকা এখানে দেখানো হবে -->
             <div id="list-container">
-                <!-- জাভাস্ক্রিপ্ট দিয়ে তালিকা লোড হবে -->
+                <ul id="surah-list"></ul>
+                <ul id="para-list" style="display: none;"></ul>
             </div>
         </main>
     </div>
 
     <!-- পিডিএফ ভিউয়ার (ডিফল্টভাবে লুকানো থাকবে) -->
-    <!-- ===== iframe-এর id ঠিক করা হয়েছে ===== -->
-    <div id="pdf-viewer" class="pdf-viewer hidden">
-        <button class="close-btn" onclick="closePdf()">×</button>
-        <iframe id="pdf-frame" frameborder="0"></iframe>
+    <div id="pdf-viewer" class="pdf-viewer">
+        <div class="pdf-controls">
+            <button id="close-btn">×</button>
+            <button id="prev-page">পূর্ববর্তী</button>
+            <input type="number" id="page-number" value="1" min="1">
+            <span>/ <span id="total-pages"></span></span>
+            <button id="next-page">পরবর্তী</button>
+            <button id="zoom-in">+</button>
+            <button id="zoom-out">-</button>
+        </div>
+        <div id="canvas-container"></div>
     </div>
-    <!-- ===================================== -->
 
     <!-- জাভাস্ক্রিপ্ট ফাইল লিঙ্ক করা হয়েছে -->
     <script src="js/script.js"></script>
