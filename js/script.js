@@ -1,169 +1,85 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const surahListContainer = document.getElementById('surah-list');
-    const paraListContainer = document.getElementById('para-list');
-    const surahBtn = document.getElementById('surah-btn');
-    const paraBtn = document.getElementById('para-btn');
+// ডেটা লোড করার জন্য একটি সার্বজনীন ফাংশন
+async function fetchData(fileName) {
+  try {
+    const response = await fetch(fileName);
+    if (!response.ok) throw new Error(`ফাইল লোড করা যায়নি: ${fileName}`);
+    return await response.json();
+  } catch (error) {
+    console.error('ডেটা লোড করতে সমস্যা হয়েছে:', error);
+    return [];
+  }
+}
+
+// সূরা বা পারার তালিকা দেখানোর প্রধান ফাংশন
+async function loadList(type) {
+  const listContainer = document.getElementById('list-container');
+  listContainer.innerHTML = '<div class="loading">লোড হচ্ছে...</div>';
+  let data = [];
+  let listHTML = '';
+
+  if (type === 'surah') {
+    data = await fetchData('surah_list.json');
+    data.forEach(item => {
+      listHTML += `
+        <div class="list-item" onclick="openPdf(${item.start_page})">
+          <div class="item-number">${item.surah_no}</div>
+          <div class="item-details">
+            <p><strong>${item.surah_name_bn}</strong> (${item.surah_name_ar})</p>
+            <p class="item-info">আয়াত: ${item.total_ayat} | প্রকার: ${item.revelation_type}</p>
+          </div>
+          <div class="item-icon">&#128214;</div>
+        </div>`;
+    });
+  } else if (type === 'para') {
+    data = await fetchData('para_list.json');
+    data.forEach(item => {
+      listHTML += `
+        <div class="list-item" onclick="openPdf(${item.start_page})">
+          <div class="item-number">${item.para_number}</div>
+          <div class="item-details">
+            <p><strong>${item.para_name_ar}</strong></p> 
+            <p class="item-info">${item.para_name_bn}</p>
+          </div>
+          <div class="item-icon">&#128214;</div>
+        </div>`;
+    });
+  }
+  listContainer.innerHTML = data.length ? listHTML : '<div class="error-message">❌ ডেটা পাওয়া যায়নি।</div>';
+}
+
+// পিডিএফ ভিউয়ার খোলার ফাংশন (চূড়ান্ত এবং সঠিক)
+function openPdf(pageNumber) {
     const pdfViewer = document.getElementById('pdf-viewer');
-    const pdfEmbed = document.getElementById('pdf-embed');
-    const closeBtn = document.getElementById('close-btn');
-    const pageNumberInput = document.getElementById('page-number');
-    const totalPagesSpan = document.getElementById('total-pages');
-    const prevPageBtn = document.getElementById('prev-page');
-    const nextPageBtn = document.getElementById('next-page');
-    const zoomInBtn = document.getElementById('zoom-in');
-    const zoomOutBtn = document.getElementById('zoom-out');
-
-    let pdfDoc = null;
-    let pageNum = 1;
-    let pageIsRendering = false;
-    let pageNumIsPending = null;
-    let zoomLevel = 1.5;
-    const RENDER_SCALE = 1.5;
-
-    // Use the correct path for the hosted PDF file
-    const pdfUrl = 'quran.pdf';
-
-    // Load Surah and Para lists
-    fetch('surah_list.json')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(surah => {
-                const li = document.createElement('li');
-                li.innerHTML = `<span>${surah.name} (${surah.englishName})</span><span>${surah.page}</span>`;
-                li.dataset.page = surah.page;
-                surahListContainer.appendChild(li);
-            });
-        });
-
-    fetch('para_list.json')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(para => {
-                const li = document.createElement('li');
-                li.innerHTML = `<span>${para.name}</span><span>${para.page}</span>`;
-                li.dataset.page = para.page;
-                paraListContainer.appendChild(li);
-            });
-        });
-
-    // Tab switching
-    surahBtn.addEventListener('click', () => {
-        surahBtn.classList.add('active');
-        paraBtn.classList.remove('active');
-        surahListContainer.style.display = 'block';
-        paraListContainer.style.display = 'none';
-    });
-
-    paraBtn.addEventListener('click', () => {
-        paraBtn.classList.add('active');
-        surahBtn.classList.remove('active');
-        paraListContainer.style.display = 'block';
-        surahListContainer.style.display = 'none';
-    });
-
-    // Function to render page
-    const renderPage = num => {
-        pageIsRendering = true;
-        pdfDoc.getPage(num).then(page => {
-            const viewport = page.getViewport({ scale: zoomLevel });
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            const renderContext = {
-                canvasContext: ctx,
-                viewport: viewport
-            };
-
-            page.render(renderContext).promise.then(() => {
-                pageIsRendering = false;
-                if (pageNumIsPending !== null) {
-                    renderPage(pageNumIsPending);
-                    pageNumIsPending = null;
-                }
-                // Clear previous canvas and append new one
-                const container = document.getElementById('canvas-container');
-                container.innerHTML = '';
-                container.appendChild(canvas);
-            });
-
-            pageNumberInput.value = num;
-        });
-    };
-
-    const queueRenderPage = num => {
-        if (pageIsRendering) {
-            pageNumIsPending = num;
-        } else {
-            renderPage(num);
-        }
-    };
-
-    // PDF viewer logic
-    const openPdfViewer = (page) => {
-        pageNum = parseInt(page, 10);
-        pdfViewer.style.display = 'flex';
-
-        pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
-            pdfDoc = pdfDoc_;
-            totalPagesSpan.textContent = pdfDoc.numPages;
-            renderPage(pageNum);
-        }).catch(err => {
-            console.error('Error loading PDF:', err);
-            // Display an error message to the user
-            const container = document.getElementById('canvas-container');
-            container.innerHTML = `<p style="color: white; text-align: center;">দুঃখিত, কুরআন ফাইলটি লোড করা যাচ্ছে না।</p><p style="color: white; text-align: center;">Error: ${err.message}</p>`;
-        });
-    };
-
-    surahListContainer.addEventListener('click', (e) => {
-        const li = e.target.closest('li');
-        if (li && li.dataset.page) {
-            openPdfViewer(li.dataset.page);
-        }
-    });
-
-    paraListContainer.addEventListener('click', (e) => {
-        const li = e.target.closest('li');
-        if (li && li.dataset.page) {
-            openPdfViewer(li.dataset.page);
-        }
-    });
-
-    closeBtn.addEventListener('click', () => {
-        pdfViewer.style.display = 'none';
-    });
-
-    prevPageBtn.addEventListener('click', () => {
-        if (pageNum <= 1) return;
-        pageNum--;
-        queueRenderPage(pageNum);
-    });
-
-    nextPageBtn.addEventListener('click', () => {
-        if (pageNum >= pdfDoc.numPages) return;
-        pageNum++;
-        queueRenderPage(pageNum);
-    });
-
-    pageNumberInput.addEventListener('change', () => {
-        const newPageNum = parseInt(pageNumberInput.value, 10);
-        if (newPageNum > 0 && newPageNum <= pdfDoc.numPages) {
-            pageNum = newPageNum;
-            queueRenderPage(pageNum);
-        }
-    });
+    const pdfFrame = document.getElementById('pdf-frame'); // সঠিক id ব্যবহার করা হচ্ছে
     
-    zoomInBtn.addEventListener('click', () => {
-        zoomLevel += 0.25;
-        renderPage(pageNum);
-    });
+    const pdfUrl = `${window.location.origin}${window.location.pathname.replace('index.html', '')}quran.pdf`;
+    const viewerUrl = `lib/web/viewer.html?file=${encodeURIComponent(pdfUrl)}#page=${pageNumber}`;
 
-    zoomOutBtn.addEventListener('click', () => {
-        if (zoomLevel <= 0.5) return;
-        zoomLevel -= 0.25;
-        renderPage(pageNum);
-    });
+    pdfFrame.src = viewerUrl;
+    pdfViewer.classList.remove('hidden');
+}
 
-});
+// পিডিএফ ভিউয়ার বন্ধ করার ফাংশন
+function closePdf() {
+  document.getElementById('pdf-viewer').classList.add('hidden');
+  document.getElementById('pdf-frame').src = ''; // iframe রিসোর্স খালি করা
+}
+
+// ট্যাব পরিবর্তনের ফাংশন
+function setupTabs() {
+  const tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const type = tab.getAttribute('data-type');
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      loadList(type);
+    });
+  });
+}
+
+// পৃষ্ঠা লোড হওয়ার সাথে সাথে ডিফল্টভাবে সূরা তালিকা দেখানো এবং ট্যাব সেটআপ করা
+window.onload = () => {
+  setupTabs();
+  loadList('surah');
+};
