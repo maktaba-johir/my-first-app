@@ -4,55 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>কুরআন অ্যাপ</title>
-    <!-- CSS ফাইল লিঙ্ক করা হয়েছে -->
+    <!-- CSS ক্যাশিং সমস্যা সমাধানের জন্য ?v=1 যোগ করা হয়েছে -->
     <link rel="stylesheet" href="css/style.css?v=1">
-    <!-- PDF.js লাইব্রেরি লোড করার জন্য -->
+    <!-- PDF.js লাইব্রেরি লোড করা হচ্ছে -->
     <script src="lib/build/pdf.mjs" type="module"></script>
-    <script>
-        // PDF.js ওয়ার্কার স্ক্রিপ্ট সেট করা
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/build/pdf.worker.mjs';
-    </script>
 </head>
 <body>
-
-    <!-- মূল কন্টেইনার -->
     <div class="container">
-        <header>
-            <h1>কুরআন অ্যাপ</h1>
-        </header>
+        <h1>কুরআন অ্যাপ</h1>
 
-        <main>
-            <!-- ট্যাব বাটনগুলোকে মাঝখানে রাখার জন্য নতুন div যোগ করা হয়েছে -->
-            <div class="tab-container">
-                <button id="surah-btn" class="tab-btn active">সূরা</button>
-                <button id="para-btn" class="tab-btn">পারা</button>
-            </div>
-
-            <!-- সূরা এবং পারার তালিকা এখানে দেখানো হবে -->
-            <div id="list-container">
-                <ul id="surah-list"></ul>
-                <ul id="para-list" style="display: none;"></ul>
-            </div>
-        </main>
-    </div>
-
-    <!-- পিডিএফ ভিউয়ার (ডিফল্টভাবে লুকানো থাকবে) -->
-    <div id="pdf-viewer" class="pdf-viewer">
-        <div class="pdf-controls">
-            <button id="close-btn">×</button>
-            <button id="prev-page">পূর্ববর্তী</button>
-            <input type="number" id="page-number" value="1" min="1">
-            <span>/ <span id="total-pages"></span></span>
-            <button id="next-page">পরবর্তী</button>
-            <button id="zoom-in">+</button>
-            <button id="zoom-out">-</button>
+        <div class="tab-container">
+            <button id="surah-btn" class="active">সূরা</button>
+            <button id="para-btn">পারা</button>
         </div>
-        <div id="canvas-container"></div>
+
+        <div id="list-container" class="list-container">
+            <!-- Surah/Para list will be injected here by script.js -->
+        </div>
+
+        <div id="pdf-viewer" class="pdf-viewer hidden">
+            <div class="pdf-controls">
+                <button id="close-btn">×</button>
+                <button id="prev-page">পূর্ববর্তী</button>
+                <input type="number" id="page-number" value="1" min="1">
+                <button id="next-page">পরবর্তী</button>
+                <button id="zoom-in">+</button>
+                <button id="zoom-out">-</button>
+            </div>
+            <canvas id="pdf-canvas"></canvas>
+        </div>
     </div>
 
-    <!-- জাভাস্ক্রিপ্ট ফাইল লিঙ্ক করা হয়েছে -->
+    <script>
+        // PDF.js Worker Configuration - এটি মোবাইল সাপোর্টের জন্য অপরিহার্য
+        if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/build/pdf.worker.mjs';
+        }
+    </script>
+    <!-- আপনার অ্যাপের মূল স্ক্রিপ্ট ফাইল -->
     <script src="js/script.js"></script>
-
 </body>
 </html>
-
